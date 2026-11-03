@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Corte etário matrículas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1 id="titulo">Corte etário matrículas</h1>
+    <p class="regra" id="regra"></p>
+  </header>
+
+  <main>
+    <section class="controles" aria-label="Escolha do ano letivo">
+      <div class="anos" id="anos">
+        <button type="button" id="anterior" aria-label="Ano letivo anterior">‹ Ano anterior</button>
+        <div class="ano-atual" aria-live="polite">
+          <strong id="anoTitulo"></strong>
+          <small id="anoLegenda"></small>
+        </div>
+        <button type="button" id="proximo" aria-label="Próximo ano letivo">Próximo ano ›</button>
+        <button type="button" id="voltar" class="secundario" hidden></button>
+      </div>
+    </section>
+
+    <section class="quadro" aria-label="Tabela de corte etário">
+      <div class="rolagem">
+        <table id="tabela"></table>
+      </div>
+      <ul class="legenda" id="legenda" aria-label="Cores das turmas"></ul>
+      <p class="nota" id="nota"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
