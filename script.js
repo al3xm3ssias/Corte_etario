@@ -143,7 +143,38 @@ function renderTudo() {
 
 function mudarAno(delta) {
   anoSelecionado += delta;
-  renderTudo();
+  /* ---------- Exportar PDF (paisagem) ---------- */
+// Abre a impressão do navegador já em paisagem; basta escolher "Salvar como PDF".
+$("exportar").addEventListener("click", () => window.print());
+
+/* ---------- Tema (claro / médio / escuro) ---------- */
+
+function marcarTema(tema) {
+  document.querySelectorAll("[data-tema]").forEach((b) =>
+    b.setAttribute("aria-pressed", String(b.dataset.tema === tema)));
+}
+
+function aplicarTema(tema) {
+  document.documentElement.setAttribute("data-theme", tema);
+  marcarTema(tema);
+  try { localStorage.setItem("tema", tema); } catch (e) {}
+}
+
+document.querySelectorAll("[data-tema]").forEach((b) =>
+  b.addEventListener("click", () => aplicarTema(b.dataset.tema)));
+
+// Na impressão usa sempre o tema claro (economiza tinta) e depois volta
+let temaAntesDeImprimir = null;
+window.addEventListener("beforeprint", () => {
+  temaAntesDeImprimir = document.documentElement.getAttribute("data-theme");
+  document.documentElement.setAttribute("data-theme", "claro");
+});
+window.addEventListener("afterprint", () => {
+  if (temaAntesDeImprimir) document.documentElement.setAttribute("data-theme", temaAntesDeImprimir);
+});
+
+marcarTema(document.documentElement.getAttribute("data-theme"));
+renderTudo();
 }
 
 $("anterior").addEventListener("click", () => mudarAno(-1));
@@ -154,4 +185,31 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") mudarAno(1);
 });
 
+/* ---------- Tema (claro / médio / escuro) ---------- */
+
+function marcarTema(tema) {
+  document.querySelectorAll("[data-tema]").forEach((b) =>
+    b.setAttribute("aria-pressed", String(b.dataset.tema === tema)));
+}
+
+function aplicarTema(tema) {
+  document.documentElement.setAttribute("data-theme", tema);
+  marcarTema(tema);
+  try { localStorage.setItem("tema", tema); } catch (e) {}
+}
+
+document.querySelectorAll("[data-tema]").forEach((b) =>
+  b.addEventListener("click", () => aplicarTema(b.dataset.tema)));
+
+// Na impressão usa sempre o tema claro (economiza tinta) e depois volta
+let temaAntesDeImprimir = null;
+window.addEventListener("beforeprint", () => {
+  temaAntesDeImprimir = document.documentElement.getAttribute("data-theme");
+  document.documentElement.setAttribute("data-theme", "claro");
+});
+window.addEventListener("afterprint", () => {
+  if (temaAntesDeImprimir) document.documentElement.setAttribute("data-theme", temaAntesDeImprimir);
+});
+
+marcarTema(document.documentElement.getAttribute("data-theme"));
 renderTudo();

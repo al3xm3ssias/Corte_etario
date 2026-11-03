@@ -8,6 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("tema"); } catch (e) {}
+      if (t !== "claro" && t !== "medio" && t !== "escuro") {
+        t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "escuro" : "claro";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
 </head>
 <body>
   <header class="topo">
@@ -26,6 +36,17 @@
         <button type="button" id="proximo" aria-label="Próximo ano letivo">Próximo ano ›</button>
         <button type="button" id="voltar" class="secundario" hidden></button>
       </div>
+
+      <div class="tema-grupo">
+        <span id="temaRotulo">Tema</span>
+        <div class="tema" role="group" aria-labelledby="temaRotulo">
+          <button type="button" data-tema="claro" aria-pressed="false">Claro</button>
+          <button type="button" data-tema="medio" aria-pressed="false">Médio</button>
+          <button type="button" data-tema="escuro" aria-pressed="false">Escuro</button>
+        </div>
+      </div>
+
+      <button type="button" id="exportar" class="exportar" title="Abre a impressão: escolha &quot;Salvar como PDF&quot;">⬇ Exportar PDF</button>
     </section>
 
     <section class="quadro" aria-label="Tabela de corte etário">

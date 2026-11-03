@@ -1,45 +1,85 @@
-:root {
-  --fundo: #f4f1f8;
-  --superficie: #ffffff;
-  --tinta: #1a1a2e;
-  --tinta-suave: #5a5873;
-  --linha: #dcd8e8;
-  --destaque: #3b2fb0;
+/* ==========================================================
+   Temas: claro, médio e escuro (atributo data-theme no <html>)
+   Cores suaves, sem preto/branco puro, para cansar menos a vista.
+   ========================================================== */
+
+:root, :root[data-theme="claro"] {
+  color-scheme: light;
+  --fundo: #f6f4f1;
+  --superficie: #fffefc;
+  --tinta: #2b2b3a;
+  --tinta-suave: #6a6880;
+  --linha: #e3dfe8;
+  --destaque: #5b50c8;
   --destaque-texto: #ffffff;
-  --faixa: #ffd91a;
-  --cab1: #1f1b4d;
-  --cab2: #34308a;
+  --faixa: #f3e3a0;
+  --faixa-tinta: #3a3418;
+  --sombra-topo: #dccb84;
+  --cab1: #4a4778;
+  --cab2: #6a67a0;
+  --cab-tinta: #f6f4fb;
   --raio: 12px;
 
-  --t0: #fdd9b0;  /* Berçário */
-  --t1: #b5e36f;  /* Infantil 1 */
-  --t2: #c9def5;  /* Infantil 2 */
-  --t3: #78b9f7;  /* Infantil 3 */
-  --t4: #f8a8a2;  /* Infantil 4 */
-  --t5: #fbad3b;  /* Infantil 5 */
-  --t6: #fbe56b;  /* 1º ano */
-  --t7: #d3b8f2;  /* 2º ano */
-  --t8: #8fe0cb;  /* 3º ano */
-  --t9: #f2a3cf;  /* 4º ano */
-  --t10: #a9b6f2; /* 5º ano */
-  --nao: #e4e2ea;
-  --celula-tinta: #1a1a2e;
+  --t0: #f7e3cc;  --t1: #d8ecb8;  --t2: #dce8f5;  --t3: #b5d6f2;
+  --t4: #f4cdc9;  --t5: #f6cf9a;  --t6: #f6ebb0;  --t7: #e3d5f2;
+  --t8: #bfe8dc;  --t9: #f2cde2;  --t10: #ccd3f2;
+  --nao: #ebe9ee;
+  --celula-tinta: #2b2b3a;
+  --nao-tinta: #7a7890;
+  --erro: #b8453b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fundo: #14122b;
-    --superficie: #1e1b3d;
-    --tinta: #efecfb;
-    --tinta-suave: #aaa6c9;
-    --linha: #35315f;
-    --destaque: #a79cff;
-    --destaque-texto: #14122b;
-  }
+:root[data-theme="medio"] {
+  color-scheme: light;
+  --fundo: #dcd9e6;
+  --superficie: #ebe9f2;
+  --tinta: #26253a;
+  --tinta-suave: #55536f;
+  --linha: #bfbbd0;
+  --destaque: #4a3fb0;
+  --destaque-texto: #f4f2fb;
+  --faixa: #e8d48a;
+  --faixa-tinta: #33300f;
+  --sombra-topo: #b9a65e;
+  --cab1: #3f3c6e;
+  --cab2: #5a5790;
+  --cab-tinta: #f1effa;
+
+  --t0: #eccaa6;  --t1: #c2dc96;  --t2: #bdd2ea;  --t3: #94c0e6;
+  --t4: #e8b0ab;  --t5: #e8b872;  --t6: #e8d98a;  --t7: #cdb9e6;
+  --t8: #9fd6c6;  --t9: #e5b2d0;  --t10: #b3bde6;
+  --nao: #cfcdd9;
+  --celula-tinta: #26253a;
+  --nao-tinta: #615f7a;
+  --erro: #a63a31;
+}
+
+:root[data-theme="escuro"] {
+  color-scheme: dark;
+  --fundo: #17161f;
+  --superficie: #22212d;
+  --tinta: #e6e4f0;
+  --tinta-suave: #a09db8;
+  --linha: #36344a;
+  --destaque: #a59cf0;
+  --destaque-texto: #17161f;
+  --faixa: #5f5629;
+  --faixa-tinta: #f3ecc8;
+  --sombra-topo: #3d3819;
+  --cab1: #2a2850;
+  --cab2: #38366a;
+  --cab-tinta: #e6e4f0;
+
+  --t0: #6e5a45;  --t1: #546b3a;  --t2: #4a5b73;  --t3: #3f6a8f;
+  --t4: #7a4f4c;  --t5: #85612c;  --t6: #7a6e30;  --t7: #62507d;
+  --t8: #3d7064;  --t9: #7a4a66;  --t10: #4b5390;
+  --nao: #2d2c3a;
+  --celula-tinta: #f0eef8;
+  --nao-tinta: #8f8ca8;
+  --erro: #ff9a90;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { color-scheme: light dark; }
 
 body {
   margin: 0;
@@ -48,16 +88,17 @@ body {
   font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
   line-height: 1.5;
   padding: 20px 16px 56px;
+  transition: background .2s ease, color .2s ease;
 }
 
 /* ---------- Faixa do título ---------- */
 .topo {
   max-width: 1360px; margin: 0 auto;
-  background: var(--faixa); color: #17140a;
+  background: var(--faixa); color: var(--faixa-tinta);
   border-radius: 18px;
   padding: 22px 28px 20px;
   text-align: center;
-  box-shadow: 0 6px 0 #17140a;
+  box-shadow: 0 5px 0 var(--sombra-topo);
 }
 .topo h1 {
   margin: 0; font-weight: 900; text-transform: uppercase;
@@ -68,7 +109,7 @@ body {
 main { max-width: 1360px; margin: 28px auto 0; }
 
 /* ---------- Controles ---------- */
-.controles { display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: flex-end; justify-content: center; }
+.controles { display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: flex-end; justify-content: space-between; }
 
 .anos { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .anos button {
@@ -78,29 +119,39 @@ main { max-width: 1360px; margin: 28px auto 0; }
   transition: transform .12s ease;
 }
 .anos button:active { transform: scale(.96); }
-.anos button.secundario, .consulta button.secundario {
+.anos button.secundario {
   background: transparent; color: var(--tinta); border-color: var(--linha); font-weight: 600;
 }
 .ano-atual { min-width: 150px; text-align: center; line-height: 1.1; padding: 0 6px; }
 .ano-atual strong { display: block; font-size: 2.4rem; font-weight: 900; font-variant-numeric: tabular-nums; }
 .ano-atual small { color: var(--tinta-suave); font-size: .85rem; font-weight: 600; }
 
-.consulta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.consulta label { width: 100%; font-weight: 800; font-size: .95rem; }
-.consulta input {
-  font: inherit; padding: 9px 12px; border: 2px solid var(--linha); border-radius: 10px;
-  background: var(--superficie); color: var(--tinta);
+/* seletor de tema */
+.tema-grupo { display: flex; flex-direction: column; gap: 6px; }
+.tema-grupo > span { font-weight: 800; font-size: .85rem; color: var(--tinta-suave); }
+.tema {
+  display: inline-flex; border: 2px solid var(--linha); border-radius: 999px;
+  overflow: hidden; background: var(--superficie);
 }
-.consulta button { font: inherit; padding: 9px 16px; border-radius: 999px; border: 2px solid var(--linha); cursor: pointer; }
+.tema button {
+  font: inherit; font-weight: 600; font-size: .92rem;
+  background: transparent; color: var(--tinta);
+  border: 0; padding: 8px 16px; cursor: pointer;
+}
+.tema button + button { border-left: 2px solid var(--linha); }
+.tema button[aria-pressed="true"] { background: var(--destaque); color: var(--destaque-texto); font-weight: 800; }
 
-button:focus-visible, input:focus-visible { outline: 3px solid var(--destaque); outline-offset: 3px; }
+.exportar {
+  font: inherit; font-weight: 800; cursor: pointer;
+  border: 2px solid var(--destaque); background: transparent; color: var(--destaque);
+  padding: 10px 18px; border-radius: 999px; line-height: 1.2;
+}
+.exportar:hover { background: var(--destaque); color: var(--destaque-texto); }
 
-.resultado { margin: 14px 0 0; min-height: 1.6em; font-weight: 800; font-size: 1.05rem; color: var(--destaque); }
-.resultado.erro { color: #c2362b; }
-@media (prefers-color-scheme: dark) { .resultado.erro { color: #ff9a90; } }
+button:focus-visible { outline: 3px solid var(--destaque); outline-offset: 3px; }
 
 /* ---------- Tabela ---------- */
-.quadro { margin-top: 10px; }
+.quadro { margin-top: 18px; }
 .rolagem {
   overflow: auto; max-height: 80vh;
   border-radius: var(--raio);
@@ -121,7 +172,7 @@ tr > :last-child { border-right: 0; }
 tbody tr:last-child > * { border-bottom: 0; }
 
 /* cabeçalho em duas linhas, ambas fixas ao rolar */
-thead th { position: sticky; z-index: 2; color: #fff; font-weight: 800; }
+thead th { position: sticky; z-index: 2; color: var(--cab-tinta); font-weight: 800; }
 thead tr:first-child th { top: 0; height: 44px; background: var(--cab1); font-size: 1rem; }
 thead tr:last-child th  { top: 44px; height: 42px; background: var(--cab2); font-size: 1.1rem; font-weight: 900; }
 thead th.canto {
@@ -143,17 +194,15 @@ td {
   background: var(--nao);
   transition: filter .1s ease;
 }
-td:hover { filter: brightness(.94) saturate(1.15); }
+td:hover { filter: brightness(.96) saturate(1.1); }
 td.t0 { background: var(--t0); } td.t1 { background: var(--t1); } td.t2 { background: var(--t2); }
 td.t3 { background: var(--t3); } td.t4 { background: var(--t4); } td.t5 { background: var(--t5); }
 td.t6 { background: var(--t6); } td.t7 { background: var(--t7); } td.t8 { background: var(--t8); }
 td.t9 { background: var(--t9); } td.t10 { background: var(--t10); }
-td.nao { color: #6b6880; font-weight: 600; }
+td.nao { color: var(--nao-tinta); font-weight: 600; }
 
 /* linha do corte entre março e abril */
 tr.pos-corte > * { border-top: 4px solid var(--cab1); }
-
-td.marcado { outline: 4px solid var(--tinta); outline-offset: -4px; box-shadow: inset 0 0 0 4px var(--superficie); }
 
 /* ---------- Legenda ---------- */
 .legenda { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -162,7 +211,7 @@ td.marcado { outline: 4px solid var(--tinta); outline-offset: -4px; box-shadow: 
   padding: 5px 12px 5px 6px; border-radius: 999px; background: var(--superficie);
   border: 1px solid var(--linha); font-size: .88rem; font-weight: 600;
 }
-.legenda i { width: 22px; height: 22px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,.15); }
+.legenda i { width: 22px; height: 22px; border-radius: 50%; display: inline-block; border: 1px solid rgba(128,128,128,.3); }
 
 .nota { color: var(--tinta-suave); font-size: .92rem; max-width: 100ch; margin: 14px 0 0; }
 
@@ -172,13 +221,22 @@ td.marcado { outline: 4px solid var(--tinta); outline-offset: -4px; box-shadow: 
 }
 
 @media print {
-  @page { size: landscape; margin: 10mm; }
+  @page { size: A4 landscape; margin: 8mm; }
   body { background: #fff; color: #000; padding: 0; }
-  .controles, .resultado { display: none; }
-  .topo { box-shadow: none; border: 2px solid #000; }
+  .controles { display: none; }
+  .topo { box-shadow: none; border: 2px solid #000; padding: 10px 16px; margin-bottom: 0; }
+  .topo h1 { font-size: 22pt; }
+  main { margin-top: 8px; }
+  .quadro { margin-top: 0; }
+  table, .legenda, .nota { break-inside: avoid; page-break-inside: avoid; }
+  .legenda { margin-top: 8px; }
+  .legenda li { font-size: 8pt; padding: 2px 8px 2px 4px; }
+  .legenda i { width: 14px; height: 14px; }
+  .nota { font-size: 8pt; margin-top: 6px; }
   .rolagem { max-height: none; overflow: visible; }
   thead th, tbody th { position: static; }
   table { min-width: 0; }
-  td, th { height: 30px; font-size: 9pt; }
+  td, th { height: 27px; font-size: 9pt; }
+  thead tr:first-child th, thead tr:last-child th { height: 26px; font-size: 10pt; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
